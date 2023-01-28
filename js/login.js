@@ -1,10 +1,26 @@
+let userEmail;
+let userPassword;
+
 /**
  * Loading data from server
  */
 async function initLogin() {
     await loadDataFromServer();
+    fillOutForms();
 }
 
+/**
+ * fill out input forms, if user has selected remember me
+ */
+function fillOutForms() {
+    if(localStorage.getItem('user-email') && localStorage.getItem('user-email') != '') {
+        userEmail = localStorage.getItem('user-email');
+        userPassword = localStorage.getItem('user-password');
+        document.getElementById('email').value = userEmail;
+        document.getElementById('password').value = userPassword;
+        document.getElementById('remember-me').checked = true;
+    }
+}
 
 /**
  * Setting currentUser to Guest when Logging in as Guest
@@ -39,6 +55,7 @@ async function login(e) {
 
     if (currentUser) {
         await saveOnServer('currentUser', currentUser);
+        checkRememberMeActive(currentUser);
         window.location.href = './summary.html?login=2';
     } else {
         showPopupMessage('popup-button');
@@ -46,6 +63,20 @@ async function login(e) {
     return false
 }
 
+/**
+ * check if remember me checkbox was selected to store currentUser
+ * @param {JSON} currentUser
+ */
+function checkRememberMeActive(currentUser) {
+    if (document.getElementById('remember-me').checked == true) {
+        localStorage.setItem('user-email', currentUser.email);
+        localStorage.setItem('user-password', currentUser.password);
+    }
+    if (document.getElementById('remember-me').checked == false) {
+        localStorage.setItem('user-email', '');
+        localStorage.setItem('user-password', '');
+    }
+}
 
 /**
  * Shows a popup message with animation
