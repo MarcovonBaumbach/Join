@@ -257,3 +257,48 @@
 .task-card--dragged {
     transform: rotate(5deg);
 }
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+}
+
+#delete-popup-btn {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    width: 326px;
+    height: 74px;
+    background: #2A3647;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+    border-radius: 20px;
+    color: white;
+    font-size: 21px;
+    line-height: 120%;
+    gap: 30px;
+    overflow: hidden;
+    opacity: 0;
+}
+
+.delete-animation {
+    animation: transition 3s;
+}
+
+@keyframes transition {
+    0% {
+        bottom: 10%;
+        opacity: 0;
+    }
+
+    30% {
+        bottom: 35%;
+        opacity: 1;
+    }
+
+    100% {
+        bottom: 35%;
+        opacity: 1;
+    }
+}

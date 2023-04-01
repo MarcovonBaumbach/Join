@@ -1,3 +1,4 @@
+
 /**
  * Opens the task viewer
  * @param {Number} statusId The ID of the respective status
@@ -333,6 +334,37 @@ async function saveSubtasksFromViewer() {
     }
 }
 
+
+/**
+ * Deletes the current task
+ */
+async function deleteTask() {
+    tasks[openedTask.statusId].splice(openedTask.taskId, 1);
+    await saveOnServer('tasks', tasks);
+    await initBoard();
+    toggleModal('modal-task');
+    showDeletePopup();
+}
+
+/**
+ * Shows the popup "Task deleted from board" with animation
+ */
+function showDeletePopup() {
+    let popup = document.getElementById('delete-popup-btn');
+
+    popup.classList.add('delete-animation');
+    setTimeout(function () {
+        removeDeleteAnimate(popup);
+    }, 3000);
+}
+
+/**
+ * Removes the animation class from the little popup
+ * @param {string} popup Little Popup 
+ */
+function removeDeleteAnimate(popup) {
+    popup.classList.remove('delete-animation');
+}
 
 /**
  * Renders the list of assignees to the task viewer

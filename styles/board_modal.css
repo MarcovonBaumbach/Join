@@ -63,7 +63,7 @@ button {
     padding: 50px 100px 0;
 }
 
-#btn-edit-task {
+.btn-edit {
     position: absolute;
     right: 40px;
     bottom: 30px;
@@ -77,8 +77,12 @@ button {
     cursor: pointer;
 }
 
-#btn-edit-task img {
+.btn-edit img {
     width: 25px;
+}
+
+.delete-task {
+    right: 110px !important;
 }
 
 .modal-task-close {
